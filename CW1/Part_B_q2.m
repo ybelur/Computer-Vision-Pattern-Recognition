@@ -13,11 +13,11 @@ combined_force = [force_cylinder; force_rubber; force_TPU];
 standardized_data = (combined_force - mean(combined_force, 1)) ./ std(combined_force, 1);
 
 % Perform PCA
-[coeff, score, latent, ~, explained] = pca(standardized_data);
+[coeff, score, latent, tsquared, explained] = pca(standardized_data);
 
 % Plot Scree Plot
 figure;
-plot(latent, 'k', 'LineWidth', 2);
+plot(latent, 'o-', 'LineWidth', 2);
 xlabel('Principal Component');
 ylabel('Eigenvalue');
 title('Scree Plot for PCA Analysis');
