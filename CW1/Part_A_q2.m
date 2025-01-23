@@ -1,27 +1,22 @@
 %% 2.A
-
-% Load the data for cylinder and hexagon objects
 cylinder_data = load('Data_set/cylinder_papillarray_single.mat');
 hexagon_data = load('Data_set/hexagon_papillarray_single.mat');
 
-% Extract force/torque sensor readings
 cylinder_forces = cylinder_data.ft_values; % [1x3] force vector
 hexagon_forces = hexagon_data.ft_values;  % [1x3] force vector
 
-% Extract tactile sensor data (force and displacement)
+% Extract tactile sensor data 
 cylinder_tactile_force = cylinder_data.sensor_matrices_force; % Adjust based on dataset structure
 cylinder_tactile_displacement = cylinder_data.sensor_matrices_displacement;
 hexagon_tactile_force = hexagon_data.sensor_matrices_force;
 hexagon_tactile_displacement = hexagon_data.sensor_matrices_displacement;
 
-% Extract Z-force (normal contact force)
+% Extract Z-force 
 cylinder_z_force = cylinder_forces(:, 3); % Assuming Z is the 3rd column
 hexagon_z_force = hexagon_forces(:, 3);
 
-% Identify peaks of maximum normal contact force for cylinder
+% Identify peaks of maximum normal contact force
 [cylinder_peaks, cylinder_indices] = findpeaks(cylinder_z_force, 'MinPeakProminence', 0.5);
-
-% Identify peaks of maximum normal contact force for hexagon
 [hexagon_peaks, hexagon_indices] = findpeaks(hexagon_z_force, 'MinPeakProminence', 0.5);
 
 % Extract sensor data at peak indices
