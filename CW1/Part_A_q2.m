@@ -85,3 +85,25 @@ save('hexagon_peak_data.mat', 'hexagon_peak_tactile_force', 'hexagon_peak_tactil
 
 % Display confirmation message
 disp('Tactile sensor and force/torque data at peaks have been extracted and saved.');
+
+% Plot the data
+
+% Plot tactile force data for cylinder
+figure;
+subplot(2, 1, 1);
+plot(cylinder_peak_tactile_force);
+xlabel('Time Index');
+ylabel('Tactile Force (Cylinder)');
+title('Cylinder - Tactile Force at Peaks');
+grid on;
+
+% Plot tactile force data for hexagon
+
+subplot(2, 1, 2);
+plot(hexagon_peak_tactile_force);
+xlabel('Time Index');
+ylabel('Tactile Force (Hexagon)');
+title('Hexagon - Tactile Force at Peaks');
+grid on;
+
+
