@@ -1,4 +1,4 @@
-%% 3.a
+%% A.3.a
 
 cylinder_normal = load('Data_set/cylinder_papillarray_single.mat');
 cylinder_TPU = load('Data_set/cylinder_TPU_papillarray_single.mat');
@@ -26,7 +26,7 @@ title('3D Scatter Plot of Middle Papillae Data for Cylinders');
 legend;
 grid on;
 
-%% 3.b
+%% A.3.b
 
 
 index = 2; % Corner index

@@ -1,3 +1,5 @@
+%% A.1
+
 cylinder_data = load('Data_Set/cylinder_papillarray_single.mat');
 hexagon_data = load('Data_Set/hexagon_papillarray_single.mat');
 

@@ -1,4 +1,4 @@
-%% 2.A
+%% A.2.a
 cylinder_data = load('Data_set/cylinder_papillarray_single.mat');
 hexagon_data = load('Data_set/hexagon_papillarray_single.mat');
 
@@ -49,13 +49,13 @@ ylabel('Normal Contact Force (Hexagon)');
 title('Hexagon - Normal Contact Force Peaks');
 grid on;
 
-%% 2.b
+%% A.2.b
 
 % Save the extracted data
 save('cylinder_peak_data.mat', 'cylinder_peaks', 'cylinder_indices', 'cylinder_peak_tactile_force', 'cylinder_peak_tactile_displacement', 'cylinder_peak_ft_data');
 save('hexagon_peak_data.mat', 'hexagon_peaks', 'hexagon_indices', 'hexagon_peak_tactile_force', 'hexagon_peak_tactile_displacement', 'hexagon_peak_ft_data');
 
-%% 2.c
+%% A.2.c
 
 % Load the extracted peak data for cylinder and hexagon
 cylinder_peak_data = load('cylinder_peak_data.mat');
