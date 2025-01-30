@@ -1,12 +1,26 @@
 % Load the data files
-data_cylinder = load('Data_set/cylinder_papillarray_single.mat');
-data_rubber = load('Data_set/cylinder_rubber_papillarray_single.mat');
-data_TPU = load('Data_set/cylinder_TPU_papillarray_single.mat');
+
+% ALL DATA
+% data_cylinder = load('Data_set/cylinder_papillarray_single.mat');
+% data_rubber = load('Data_set/cylinder_rubber_papillarray_single.mat');
+% data_TPU = load('Data_set/cylinder_TPU_papillarray_single.mat');
+
+% PEAK DATA
+data_cylinder = load('Peak_Data/cylinder_peak_data.mat');
+data_rubber = load('Peak_Data/cylinder_rubber_peak_data.mat');
+data_TPU = load('Peak_Data/cylinder_TPU_peak_data.mat');
 
 % Extract force data for all 9 papillae
-force_cylinder = data_cylinder.sensor_matrices_force; 
-force_rubber = data_rubber.sensor_matrices_force;  
-force_TPU = data_TPU.sensor_matrices_force;
+
+% ALL DATA
+% force_cylinder = data_cylinder.sensor_matrices_force; 
+% force_rubber = data_rubber.sensor_matrices_force;  
+% force_TPU = data_TPU.sensor_matrices_force;
+
+% PEAK DATA
+force_cylinder = data_cylinder.peak_tactile_force; 
+force_rubber = data_rubber.peak_tactile_force;  
+force_TPU = data_TPU.peak_tactile_force;
 
 % Combine and standardise the data
 combined_force = [force_cylinder; force_rubber; force_TPU];

@@ -1,20 +1,33 @@
 %% D.1.a
 
 % Load the oblong object datasets
-data_TPU = load('Data_set/hexagon_TPU_papillarray_single.mat'); % TPU material
-data_rubber = load('Data_set/oblong_rubber_papillarray_single.mat'); % Rubber material
-data_PLA = load('Data_set/oblong_papillarray_single.mat'); % PLA material
+% ALL DATA
+% data_TPU = load('Data_set/hexagon_TPU_papillarray_single.mat'); % TPU material
+% data_rubber = load('Data_set/oblong_rubber_papillarray_single.mat'); % Rubber material
+% data_PLA = load('Data_set/oblong_papillarray_single.mat'); % PLA material
+
+% PEAK DATA
+data_TPU = load('Peak_Data/oblong_TPU_peak_data.mat'); % TPU material
+data_rubber = load('Peak_Data/oblong_rubber_peak_data.mat'); % Rubber material
+data_PLA = load('Peak_Data/oblong_peak_data.mat'); % PLA material
 
 % Extract central papillae data (P4)
-TPU_displacement = data_TPU.sensor_matrices_displacement(:, 10:12); % Columns for P4 (force)
-rubber_displacement = data_rubber.sensor_matrices_displacement(:, 10:12);
-PLA_displacement = data_PLA.sensor_matrices_displacement(:, 10:12);
+% ALL DATA
+% TPU_displacement = data_TPU.sensor_matrices_displacement(:, 10:12); % Columns for P4 (force)
+% rubber_displacement = data_rubber.sensor_matrices_displacement(:, 10:12);
+% PLA_displacement = data_PLA.sensor_matrices_displacement(:, 10:12);
+
+% PEAK DATA
+TPU_displacement = data_TPU.peak_tactile_displacement(:, 10:12); % Columns for P4 (force)
+rubber_displacement = data_rubber.peak_tactile_displacement(:, 10:12);
+PLA_displacement = data_PLA.peak_tactile_displacement(:, 10:12);
+
 
 % Combine data and create labels
-data = [TPU_displacement; rubber_displacement; PLA_force];
+data = [TPU_displacement; rubber_displacement; PLA_displacement];
 labels = [repmat("TPU", size(TPU_displacement, 1), 1);
           repmat("Rubber", size(rubber_displacement, 1), 1);
-          repmat("PLA", size(PLA_force, 1), 1)];
+          repmat("PLA", size(PLA_displacement, 1), 1)];
 
 % Scatter plot of the central papillae data
 figure;

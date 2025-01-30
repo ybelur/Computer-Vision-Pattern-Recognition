@@ -1,11 +1,22 @@
 %% C.1.a
 
 % Load the provided .mat files for Oblong TPU and Oblong Rubber objects
-oblong_TPU = load('Data_set/oblong_TPU_papillarray_single.mat');
-oblong_rubber = load('Data_set/oblong_rubber_papillarray_single.mat');
 
-oblong_TPU_displacement = oblong_TPU.sensor_matrices_displacement;
-oblong_rubber_displacement = oblong_rubber.sensor_matrices_displacement;
+% ALL DATA
+% oblong_TPU = load('Data_set/oblong_TPU_papillarray_single.mat');
+% oblong_rubber = load('Data_set/oblong_rubber_papillarray_single.mat');
+
+% PEAK DATA
+oblong_TPU = load('Peak_Data/hexagon_TPU_peak_data.mat');
+oblong_rubber = load('Peak_Data/oblong_rubber_peak_data.mat');
+
+% ALL DATA
+% oblong_TPU_displacement = oblong_TPU.sensor_matrices_displacement;
+% oblong_rubber_displacement = oblong_rubber.sensor_matrices_displacement;
+
+% PEAK DATA
+oblong_TPU_displacement = oblong_TPU.peak_tactile_displacement;
+oblong_rubber_displacement = oblong_rubber.peak_tactile_displacement;
 
 % Extract the central papillae displacement (P4, index 4)
 oblong_TPU_P4 = oblong_TPU_displacement(:, 10:12); % Columns 10-12 for P4 (X, Y, Z)
