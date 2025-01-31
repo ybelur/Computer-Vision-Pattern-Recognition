@@ -134,7 +134,7 @@ for i = 1:length(object_files)
     z_force = forces(:, 3);
     
     % Identify peaks
-    [peaks, indices] = findpeaks(z_force, 'MinPeakProminence', 0.25);
+    [peaks, indices] = findpeaks(z_force, 'MinPeakProminence', 0.35);
     
     % Extract sensor data at peak indices
     peak_tactile_force = tactile_force(indices, :);
@@ -168,3 +168,4 @@ for i = 1:length(object_files)
     title([obj_name ' - Force Peaks']);
     grid on;
 end
+
