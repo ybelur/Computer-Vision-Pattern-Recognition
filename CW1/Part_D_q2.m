@@ -5,13 +5,26 @@
 % data_rubber = load('/Users/tamamabibi/Downloads/cylinder_rubber_peak_data.mat');
 % peak_data_TPU = load('/Users/tamamabibi/Downloads/cylinder_TPU_peak_data.mat');
 
-% PEAK DATA
+% ALL DATA
+% data_cylinder = load('Data_set/oblong_papillarray_single.mat');
+% data_rubber = load('Data_set/oblong_rubber_papillarray_single.mat');
+% data_TPU = load('Data_set/oblong_TPU_papillarray_single.mat');
+
+% 
+% % PEAK DATA
 data_cylinder = load('Peak_Data/oblong_peak_data.mat');
 data_rubber = load('Peak_Data/oblong_rubber_peak_data.mat');
 data_TPU = load('Peak_Data/oblong_TPU_peak_data.mat');
 
 
 % Extract force data for all 9 papillae
+
+% ALL DATA
+% displacement_cylinder = data_cylinder.sensor_matrices_displacement;
+% displacement_rubber = data_rubber.sensor_matrices_displacement;
+% displacement_TPU = data_TPU.sensor_matrices_displacement;
+
+% PEAK DATA
 displacement_cylinder = data_cylinder.peak_tactile_displacement;
 displacement_rubber = data_rubber.peak_tactile_displacement;
 displacement_TPU = data_TPU.peak_tactile_displacement;
