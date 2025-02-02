@@ -54,7 +54,7 @@ train_idx = training(cv);
 test_idx = test(cv);
 
 X_train = reduced_data(train_idx, :);
-X_train = round(X_train, 3);
+X_train = round(X_train, 2);
 
 y_train = labels(train_idx);
 y_train = round(y_train, 2);
