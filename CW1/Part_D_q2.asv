@@ -1,4 +1,5 @@
 %% Question D.2
+
 % Load the data files
 % data_cylinder = load('/Users/tamamabibi/Downloads/cylinder_peak_data.mat');
 % data_rubber = load('/Users/tamamabibi/Downloads/cylinder_rubber_peak_data.mat');
@@ -54,11 +55,7 @@ train_idx = training(cv);
 test_idx = test(cv);
 
 X_train = reduced_data(train_idx, :);
-X_train = round(X_train, 3);
-
 y_train = labels(train_idx);
-y_train = round(y_train, 2);
-
 X_test = reduced_data(test_idx, :);
 y_test = labels(test_idx);
 
@@ -68,11 +65,12 @@ bagged_model = TreeBagger(num_trees, X_train, y_train, ...
     'OOBPrediction', 'On', ...
     'Method', 'classification', ...
     'OOBPredictorImportance', 'on', ...
-    'MinLeafSize', 50);
+    'MinLeafSize', 5);
 
 %% b. Visualize two generated decision trees
-view(bagged_model.Trees{1}, 'Mode', 'graph'); 
-view(bagged_model.Trees{2}, 'Mode', 'graph');
+% % view(bagged_model.Trees{1}, 'Mode', 'graph'); 
+% view(bagged_model.Trees{2}, 'Mode', 'graph');
+
 
 %% c. Run the trained model with the test data
 % Predict the test data
