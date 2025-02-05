@@ -26,7 +26,7 @@ for i = 1:length(object_files)
     tactile_displacement = data.sensor_matrices_displacement;
     
     % Extract Z-force
-    z_force = forces(:, 3);
+    z_force = forces(:, 3); 
     
     % Identify peaks
     [peaks, indices] = findpeaks(z_force, 'MinPeakProminence', 0.35);
