@@ -60,8 +60,6 @@ for i = 1:length(object_files)
     obj_name = erase(object_files{i}, {'Data_Set/', '_papillarray_single.mat', '.mat'});
     subplot(3, 3, i);
     plot(peak_data.(obj_name).indices, peak_data.(obj_name).peaks, 'ro');
-    hold on;
-    plot(1:length(peak_data.(obj_name).peaks), peak_data.(obj_name).peaks, 'b');
     xlabel('Time Index');
     ylabel(['Normal Contact Force (' obj_name ')']);
     title([obj_name ' - Force Peaks']);
