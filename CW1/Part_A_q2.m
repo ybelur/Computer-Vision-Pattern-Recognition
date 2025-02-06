@@ -32,7 +32,7 @@ for i = 1:length(object_files)
     z_force = z_force(z_force < 0);
     
     % Identify peaks
-    [peaks, indices] = findpeaks(z_force, 'MinPeakProminence', 0.35);
+    [peaks, indices] = findpeaks(z_force, 'MinPeakProminence', 0.25);
     
     % Extract sensor data at peak indices
     peak_tactile_force = tactile_force(indices, :);
