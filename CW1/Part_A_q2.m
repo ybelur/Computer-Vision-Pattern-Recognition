@@ -30,6 +30,7 @@ for i = 1:length(object_files)
 
     % Only take negative Z force
     z_force = z_force(z_force < 0);
+
     
     % Identify peaks
     [peaks, indices] = findpeaks(z_force, 'MinPeakProminence', 0.25);
