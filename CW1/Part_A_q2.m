@@ -29,7 +29,7 @@ for i = 1:length(object_files)
     z_force = forces(:, 3);
 
     % Only take negative Z force
-    z_force = z_force(z_force < 0);
+    z_force = z_force(z_force < -2);
 
     
     % Identify peaks
