@@ -43,23 +43,19 @@ end
 fd_path = 'Photos/Test_photos/FD/';
 hg_path = 'Photos/Test_photos/HG/';
 
-fd_images = {[fd_path 'Cup_with_grid.jpeg']};  % List your FD images
+fd_images = { [fd_path '1.jpg'], 
+              [fd_path '2.jpg'], 
+              [fd_path '3.jpg'], 
+              [fd_path '4.jpg'], 
+              [fd_path '5.jpg'], 
+              [fd_path '6.jpg'] };  % List your FD images
 
-hg_images = {[hg_path 'Cup_with_grid.jpeg']};  % List your HG images
-
-% fd_images = { [fd_path '1.jpg'], 
-%               [fd_path '2.jpg'], 
-%               [fd_path '3.jpg'], 
-%               [fd_path '4.jpg'], 
-%               [fd_path '5.jpg'], 
-%               [fd_path '6.jpg'] };  % List your FD images
-% 
-% hg_images = { [hg_path '1.jpg'], 
-%               [hg_path '2.jpg'], 
-%               [hg_path '3.jpg'], 
-%               [hg_path '4.jpg'], 
-%               [hg_path '5.jpg'], 
-%               [hg_path '6.jpg'] };  % List your HG images
+hg_images = { [hg_path '1.jpg'], 
+              [hg_path '2.jpg'], 
+              [hg_path '3.jpg'], 
+              [hg_path '4.jpg'], 
+              [hg_path '5.jpg'], 
+              [hg_path '6.jpg'] };  % List your HG images
 
 
 find_correspondence(fd_images, hg_images);
