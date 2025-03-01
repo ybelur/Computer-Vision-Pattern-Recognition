@@ -40,22 +40,28 @@ function find_correspondence(fd_images, hg_images)
     end
 end
 
-fd_path = 'Photos/FD/';
-hg_path = 'Photos/HG/';
+fd_path = 'Photos/Test_photos/FD/';
+hg_path = 'Photos/Test_photos/HG/';
 
-fd_images = { [fd_path 'Front_On.jpg'], 
-              [fd_path 'Left_Side.jpg'], 
-              [fd_path 'Right_Side.jpg'], 
-              [fd_path 'Top_Down_Front_On.jpg'], 
-              [fd_path 'Top_Down_Left_Side.jpg'], 
-              [fd_path 'Top_Down_Right_Side.jpg'] };  % List your FD images
+fd_images = {[fd_path '1.jpg'], 
+             [fd_path '2.jpg']};  % List your FD images
 
-hg_images = { [hg_path 'Front_On.jpg'], 
-              [hg_path 'Left_Side.jpg'], 
-              [hg_path 'Right_Side.jpg'], 
-              [hg_path 'Top_Down_Front_On.jpg'], 
-              [hg_path 'Top_Down_Left_Side.jpg'], 
-              [hg_path 'Top_Down_Right_Side.jpg'] };  % List your HG images
+hg_images = {[hg_path '1.jpg'], 
+             [hg_path '2.jpg']};  % List your HG images
+
+% fd_images = { [fd_path '1.jpg'], 
+%               [fd_path '2.jpg'], 
+%               [fd_path '3.jpg'], 
+%               [fd_path '4.jpg'], 
+%               [fd_path '5.jpg'], 
+%               [fd_path '6.jpg'] };  % List your FD images
+% 
+% hg_images = { [hg_path '1.jpg'], 
+%               [hg_path '2.jpg'], 
+%               [hg_path '3.jpg'], 
+%               [hg_path '4.jpg'], 
+%               [hg_path '5.jpg'], 
+%               [hg_path '6.jpg'] };  % List your HG images
 
 
 find_correspondence(fd_images, hg_images);
