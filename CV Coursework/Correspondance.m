@@ -33,9 +33,9 @@ function find_correspondence(fd_images, hg_images)
         matchedPointsFD = validPointsFD(indexPairs(:,1), :);
         matchedPointsHG = validPointsHG(indexPairs(:,2), :);
 
-        % Display matches
+        % Display matches without lines
         figure;
-        showMatchedFeatures(imgFD, imgHG, matchedPointsFD, matchedPointsHG, 'montage');
+        showMatchedFeatures(imgFD, imgHG, matchedPointsFD, matchedPointsHG, 'montage', 'PlotOptions', {'r.','g.','w:'});
         title(['Matched Features between FD and HG images - Pair ', num2str(i)]);
     end
 end
