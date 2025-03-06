@@ -40,8 +40,8 @@ function find_correspondence(fd_images, hg_images)
     end
 end
 
-fd_path = 'Photos/Test_photos/FD/';
-hg_path = 'Photos/Test_photos/HG/';
+fd_path = 'Photos/Grid/FD/';
+hg_path = 'Photos/Grid/HG/';
 
 fd_images = { [fd_path '1.jpg'], 
               [fd_path '2.jpg'], 
