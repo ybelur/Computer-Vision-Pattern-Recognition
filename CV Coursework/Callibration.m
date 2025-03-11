@@ -9,7 +9,7 @@ clear; close all; clc;
 %% 1. Specify Calibration Images
 % List your calibration image file names here.
 % Ensure these images show a calibration grid (e.g., checkerboard) taken from different views.
-imageFileNames = { 'Photos/Grid/HG/1.jpg', 'Photos/Grid/HG/2.jpg', 'Photos/Grid/HG/3.jpg', 'Photos/Grid/HG/4.jpg', 'Photos/Grid/HG/5.jpg', 'Photos/Grid/HG/6.jpg' };
+imageFileNames = { 'Photos/Grid/FD/1.jpg', 'Photos/Grid/FD/2.jpg', 'Photos/Grid/FD/3.jpg', 'Photos/Grid/FD/4.jpg', 'Photos/Grid/FD/5.jpg', 'Photos/Grid/FD/6.jpg' };
 
 %% 2. Detect Checkerboard Points
 % detectCheckerboardPoints automatically finds the corners in the grid pattern.
