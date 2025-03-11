@@ -33,12 +33,6 @@ disp(H.T);
 figure; showMatchedFeatures(img1, img2, matchedPoints1, matchedPoints2, 'montage', 'PlotOptions', {'r.','g.','w:'});
 title('Keypoints Matching for Homography Estimation');
 
-% Warp one image using estimated homography
-% outputView = imref2d(size(gray1));
-% warpedImage = imwarp(img1, H, 'OutputView', outputView);
-% figure; imshowpair(warpedImage, img2, 'blend');
-% title('Warped Image Using Homography');
-
 %% ======== TASK 4.2: Fundamental Matrix Estimation ===========
 % Detect feature points again
 points1 = detectSURFFeatures(gray1);

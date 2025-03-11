@@ -20,9 +20,12 @@ function find_correspondence(fd_images, hg_images)
         end
 
         % Detect features and extract descriptors
-        pointsFD = detectSURFFeatures(imgFD);
-        pointsHG = detectSURFFeatures(imgHG);
+        % pointsFD = detectSURFFeatures(imgFD);
+        % pointsHG = detectSURFFeatures(imgHG);
         
+        pointsFD = detectBRISKFeatures(imgFD);
+        pointsHG = detectBRISKFeatures(imgHG);
+
         [featuresFD, validPointsFD] = extractFeatures(imgFD, pointsFD);
         [featuresHG, validPointsHG] = extractFeatures(imgHG, pointsHG);
 
@@ -57,5 +60,7 @@ hg_images = { [hg_path '1.jpg'],
               [hg_path '5.jpg'], 
               [hg_path '6.jpg'] };  % List your HG images
 
+% fd_images = { ['5.1.jpg'] }
+% hg_images = { ['5.2.jpg'] }
 
 find_correspondence(fd_images, hg_images);

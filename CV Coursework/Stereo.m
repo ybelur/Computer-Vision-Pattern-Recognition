@@ -1,125 +1,131 @@
-%% Task 5: 3D Geometry - Stereo Rectification and Depth Map Calculation
-% This script assumes you have a stereo pair (e.g., 'FD1.jpg' and 'FD2.jpg')
-% taken from different viewpoints. The code:
-%   1) Rectifies the images using an uncalibrated method.
-%   2) Displays the rectified pair with horizontal epipolar lines.
-%   3) Computes a disparity map.
-%   4) Computes a depth map from the disparity map.
-%
-% Requirements: Computer Vision Toolbox
+% Load stereo images (Modify file names accordingly)
+leftImg = imread('Photos/Grid/HG/6.jpg');  
+rightImg = imread('Photos/Grid/FD/6.jpg'); 
 
-clear; close all; clc;
+% Convert to grayscale (if necessary)
+if size(leftImg, 3) == 3
+    leftImgGray = rgb2gray(leftImg);
+    rightImgGray = rgb2gray(rightImg);
+else
+    leftImgGray = leftImg;
+    rightImgGray = rightImg;
+end
 
-%% 1. Load Stereo Images
-I1 = imread('Photos/Grid/FD/6.jpg');  % Left image
-I2 = imread('Photos/Grid/HG/6.jpg');  % Right image
+% Detect and extract features
+points1 = detectSURFFeatures(leftImgGray);
+points2 = detectSURFFeatures(rightImgGray);
+[features1, validPoints1] = extractFeatures(leftImgGray, points1);
+[features2, validPoints2] = extractFeatures(rightImgGray, points2);
 
-% Convert to grayscale if needed
-if size(I1,3)==3, I1_gray = rgb2gray(I1); else, I1_gray = I1; end
-if size(I2,3)==3, I2_gray = rgb2gray(I2); else, I2_gray = I2; end
-
-%% 2. Detect and Match Features to Estimate the Fundamental Matrix
-% Detect features in both images.
-points1 = detectSURFFeatures(I1_gray);
-points2 = detectSURFFeatures(I2_gray);
-
-% Extract features.
-[features1, validPoints1] = extractFeatures(I1_gray, points1);
-[features2, validPoints2] = extractFeatures(I2_gray, points2);
-
-% Match features between the two images.
+% Match features
 indexPairs = matchFeatures(features1, features2, 'Unique', true);
 matchedPoints1 = validPoints1(indexPairs(:,1));
 matchedPoints2 = validPoints2(indexPairs(:,2));
 
-% Estimate the fundamental matrix using RANSAC.
-[F, inliers] = estimateFundamentalMatrix(matchedPoints1, matchedPoints2, ...
-    'Method', 'RANSAC', 'NumTrials', 2000, 'DistanceThreshold', 1e-4);
+% Estimate fundamental matrix
+[fMatrix, inliers] = estimateFundamentalMatrix(matchedPoints1, matchedPoints2, ...
+    'Method', 'RANSAC', 'NumTrials', 2000, 'DistanceThreshold', 1.5);
 
-% Retain only the inlier matches.
+% Select inlier matches
 inlierPoints1 = matchedPoints1(inliers);
 inlierPoints2 = matchedPoints2(inliers);
 
-%% 3. Perform Uncalibrated Stereo Rectification
-% Estimate rectification transforms for both images.
-[t1, t2] = estimateUncalibratedRectification(F, ...
-    inlierPoints1.Location, inlierPoints2.Location, size(I1_gray));
+% Display original stereo pair
+figure;
+subplot(2,2,1);
+imshow(leftImg);
+title('Original HG Image');
 
-% Create projective transformations.
-rectifyTform1 = projective2d(t1);
-rectifyTform2 = projective2d(t2);
+subplot(2,2,2);
+imshow(rightImg);
+title('Original FD Image');
 
-% Warp the images to obtain rectified images.
-[I1_rect, ref1] = imwarp(I1_gray, rectifyTform1);
-[I2_rect, ref2] = imwarp(I2_gray, rectifyTform2);
+% Stereo Rectification
+imageSize = size(leftImgGray);
+[t1, t2] = estimateUncalibratedRectification(fMatrix, inlierPoints1.Location, inlierPoints2.Location, imageSize);
 
-% Display the rectified images side-by-side.
-figure('Name','Rectified Stereo Pair');
-subplot(1,2,1);
-imshow(I1_rect, ref1);
-title('Rectified Image 1');
-subplot(1,2,2);
-imshow(I2_rect, ref2);
-title('Rectified Image 2');
+% Convert to projective transformations
+tform1 = projective2d(t1);
+tform2 = projective2d(t2);
 
-%% 4. Overlay Epipolar (Horizontal) Lines on the Rectified Images
-% In rectified images, epipolar lines become horizontal. We overlay lines at
-% regular vertical intervals.
-numLines = 10;
-lineSpacing1 = floor(size(I1_rect,1) / numLines);
-lineSpacing2 = floor(size(I2_rect,1) / numLines);
+% Warp images using projective transformation
+leftRectified = imwarp(leftImgGray, tform1, 'OutputView', imref2d(imageSize));
+rightRectified = imwarp(rightImgGray, tform2, 'OutputView', imref2d(imageSize));
 
-figure('Name','Epipolar Lines on Rectified Images');
-subplot(1,2,1);
-imshow(I1_rect, ref1); hold on;
-for k = 1:numLines
-    y = k * lineSpacing1;
-    line([1, size(I1_rect,2)], [y, y], 'Color', 'r', 'LineStyle', '--');
+% Draw epipolar lines
+figure;
+subplot(2,2,3);
+imshow(leftRectified);
+hold on;
+epilines = linspace(1, size(leftRectified,1), 10); % 10 epipolar lines
+for i = 1:length(epilines)
+    line([1 size(leftRectified,2)], [epilines(i) epilines(i)], 'Color', 'r', 'LineWidth', 1);
 end
-title('Rectified Image 1 with Epipolar Lines');
-hold off;
+title('Rectified HF Image with Epipolar Lines');
 
-subplot(1,2,2);
-imshow(I2_rect, ref2); hold on;
-for k = 1:numLines
-    y = k * lineSpacing2;
-    line([1, size(I2_rect,2)], [y, y], 'Color', 'r', 'LineStyle', '--');
+subplot(2,2,4);
+imshow(rightRectified);
+hold on;
+for i = 1:length(epilines)
+    line([1 size(rightRectified,2)], [epilines(i) epilines(i)], 'Color', 'r', 'LineWidth', 1);
 end
-title('Rectified Image 2 with Epipolar Lines');
-hold off;
+title('Rectified FD Image with Epipolar Lines');
+hold off
 
-%% 5. Compute Disparity Map
-% Define the disparity search range (adjust as needed).
-disparityRange = [0 64];
+%%
+clc; clear; 
 
-% Compute the disparity map using the rectified images.
-disparityMap = disparity(I1_rect, I2_rect, 'DisparityRange', disparityRange);
+% Load stereo images (Modify file names accordingly)
+leftImg = imread('Photos/Grid/HG/6.jpg');  
+rightImg = imread('Photos/Grid/FD/6.jpg'); 
 
-% Display the disparity map.
-figure('Name','Disparity Map');
-imshow(disparityMap, disparityRange);
-title('Disparity Map');
-colormap(gca, jet);
+% Convert to grayscale (if necessary)
+if size(leftImg, 3) == 3
+    leftImgGray = rgb2gray(leftImg);
+    rightImgGray = rgb2gray(rightImg);
+else
+    leftImgGray = leftImg;
+    rightImgGray = rightImg;
+end
+
+% Detect and extract features
+points1 = detectSURFFeatures(leftImgGray);
+points2 = detectSURFFeatures(rightImgGray);
+[features1, validPoints1] = extractFeatures(leftImgGray, points1);
+[features2, validPoints2] = extractFeatures(rightImgGray, points2);
+
+% Match features
+indexPairs = matchFeatures(features1, features2, 'Unique', true);
+matchedPoints1 = validPoints1(indexPairs(:,1));
+matchedPoints2 = validPoints2(indexPairs(:,2));
+
+% Estimate fundamental matrix
+[fMatrix, inliers] = estimateFundamentalMatrix(matchedPoints1, matchedPoints2, ...
+    'Method', 'RANSAC', 'NumTrials', 2000, 'DistanceThreshold', 1.5);
+
+% Select inlier matches
+inlierPoints1 = matchedPoints1(inliers);
+inlierPoints2 = matchedPoints2(inliers);
+
+% Stereo Rectification
+imageSize = size(leftImgGray);
+[t1, t2] = estimateUncalibratedRectification(fMatrix, inlierPoints1.Location, inlierPoints2.Location, imageSize);
+
+% Convert to projective transformations
+tform1 = projective2d(t1);
+tform2 = projective2d(t2);
+
+% Warp images using projective transformation
+leftRectified = imwarp(leftImgGray, tform1, 'OutputView', imref2d(imageSize));
+rightRectified = imwarp(rightImgGray, tform2, 'OutputView', imref2d(imageSize));
+
+% Compute disparity map
+disparityRange = [0 64]; % Adjust range based on scene
+disparityMap = disparitySGM(leftRectified, rightRectified, 'DisparityRange', disparityRange);
+
+% Display depth map
+figure;
+imshow(disparityMap, [disparityRange(1) disparityRange(2)]);
+colormap jet;
 colorbar;
-
-%% 6. Calculate and Display Depth Map
-% To convert disparity to depth, use the formula:
-%       depth = (focalLength * baseline) ./ disparity
-% You must supply the focal length (in pixels) and baseline (in meters) from your calibration.
-% For demonstration, we use example values.
-focalLength = 700;  % Example focal length in pixels (adjust as per your calibration)
-baseline = 0.1;     % Example baseline in meters (adjust as per your setup)
-
-% Avoid division by zero (set depth to Inf where disparity is 0).
-depthMap = (focalLength * baseline) ./ double(disparityMap);
-depthMap(disparityMap == 0) = Inf;
-
-% Display the depth map.
-figure('Name','Depth Map');
-imshow(depthMap, [0, 5]); % Adjust display range as needed.
-title('Depth Map');
-colormap(gca, jet);
-colorbar;
-
-%% End of Script
-disp('Stereo rectification, disparity, and depth map computation completed.');
+title('Depth Map Estimated from Stereo Pair');
