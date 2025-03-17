@@ -1,8 +1,8 @@
 clc; clear; close all;
 
 % Load stereo images (Modify file names accordingly)
-leftImg = imread('Photos/Grid/HG/6.jpg');  
-rightImg = imread('Photos/Grid/FD/6.jpg'); 
+leftImg = imread('Photos/Grid/HG/1.jpg');  
+rightImg = imread('Photos/Grid/FD/1.jpg'); 
 
 % Convert to grayscale (if necessary)
 if size(leftImg, 3) == 3

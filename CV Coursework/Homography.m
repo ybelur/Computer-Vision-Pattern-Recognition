@@ -35,8 +35,8 @@ title('Keypoints Matching for Homography Estimation');
 
 %% ======== TASK 4.2: Fundamental Matrix Estimation ===========
 % Detect feature points again
-% points1 = detectSURFFeatures(gray1);
-% points2 = detectSURFFeatures(gray2);
+points1 = detectSURFFeatures(gray1);
+points2 = detectSURFFeatures(gray2);
 
 % Extract features
 [features1, validPoints1] = extractFeatures(gray1, points1);

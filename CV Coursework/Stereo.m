@@ -1,6 +1,6 @@
 % Load stereo images (Modify file names accordingly)
-leftImg = imread('Photos/Grid/HG/6.jpg');  
-rightImg = imread('Photos/Grid/FD/6.jpg'); 
+leftImg = imread('Photos/Grid/HG/1.jpg');  
+rightImg = imread('Photos/Grid/FD/1.jpg'); 
 
 % Convert to grayscale (if necessary)
 if size(leftImg, 3) == 3
@@ -12,8 +12,10 @@ else
 end
 
 % Detect and extract features
+
 points1 = detectSURFFeatures(leftImgGray);
 points2 = detectSURFFeatures(rightImgGray);
+
 [features1, validPoints1] = extractFeatures(leftImgGray, points1);
 [features2, validPoints2] = extractFeatures(rightImgGray, points2);
 
