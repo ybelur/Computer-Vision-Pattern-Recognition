@@ -119,13 +119,13 @@ tform2 = projective2d(t2);
 leftRectified = imwarp(leftImgGray, tform1, 'OutputView', imref2d(imageSize));
 rightRectified = imwarp(rightImgGray, tform2, 'OutputView', imref2d(imageSize));
 
-% Compute disparity map
-disparityRange = [0 64]; % Adjust range based on scene
-disparityMap = disparitySGM(leftRectified, rightRectified, 'DisparityRange', disparityRange);
-
-% Display depth map
-figure;
-imshow(disparityMap, [disparityRange(1) disparityRange(2)]);
-colormap jet;
-colorbar;
-title('Depth Map Estimated from Stereo Pair');
+% % Compute disparity map
+% disparityRange = [0 64]; % Adjust range based on scene
+% disparityMap = disparitySGM(leftRectified, rightRectified, 'DisparityRange', disparityRange);
+% 
+% % Display depth map
+% figure;
+% imshow(disparityMap, [disparityRange(1) disparityRange(2)]);
+% colormap jet;
+% colorbar;
+% title('Depth Map Estimated from Stereo Pair');

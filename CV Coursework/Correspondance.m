@@ -23,8 +23,8 @@ function find_correspondence(fd_images, hg_images)
         % pointsFD = detectSURFFeatures(imgFD);
         % pointsHG = detectSURFFeatures(imgHG);
         
-        pointsFD = detectBRISKFeatures(imgFD);
-        pointsHG = detectBRISKFeatures(imgHG);
+        pointsFD = detectSURFFeatures(imgFD);
+        pointsHG = detectSURFFeatures(imgHG);
 
         [featuresFD, validPointsFD] = extractFeatures(imgFD, pointsFD);
         [featuresHG, validPointsHG] = extractFeatures(imgHG, pointsHG);
