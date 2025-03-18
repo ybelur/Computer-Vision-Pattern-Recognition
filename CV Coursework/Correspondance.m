@@ -1,3 +1,6 @@
+clc;
+clear;
+close all;
 function find_correspondence(fd_images, hg_images)
     % FIND_CORRESPONDENCE Matches features between FD and HG image sets
     % fd_images: cell array of file paths to FD images

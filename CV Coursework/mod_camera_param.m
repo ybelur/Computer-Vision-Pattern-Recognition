@@ -1,6 +1,8 @@
 % Modified version of camera_param.m
 % Camera calibration script
-
+clc;
+clear;
+close all;
 % Define image set
 imagePaths = { 'Photos/Grid/HG/1.jpg', 'Photos/Grid/HG/2.jpg', 'Photos/Grid/HG/3.jpg', ...
                'Photos/Grid/HG/4.jpg', 'Photos/Grid/HG/5.jpg', 'Photos/Grid/HG/6.jpg' };
