@@ -2,9 +2,6 @@ clc;
 clear;
 close all;
 function find_correspondence(fd_images, hg_images)
-    % FIND_CORRESPONDENCE Matches features between FD and HG image sets
-    % fd_images: cell array of file paths to FD images
-    % hg_images: cell array of file paths to HG images
     
     % Ensure the sets have the same number of images
     numImages = min(length(fd_images), length(hg_images));
@@ -41,7 +38,7 @@ function find_correspondence(fd_images, hg_images)
 
         % Display matches without lines
         figure;
-        showMatchedFeatures(imgFD, imgHG, matchedPointsFD, matchedPointsHG, 'montage', 'PlotOptions', {'r.','g.','w:'});
+        showMatchedFeatures(imgFD, imgHG, matchedPointsFD, matchedPointsHG, 'montage', 'PlotOptions', {'r.','g.','y:'});
         title(['Matched Features between FD and HG images - Pair ', num2str(i)]);
     end
 end
