@@ -9,8 +9,8 @@ fd_path = 'Photos/Grid/FD/';
 hg_path = 'Photos/Grid/HG/';
 
 % Load and resize images for display (using color versions for visualization)
-I1_color = imresize(imread([fd_path '2.jpg']), 0.15);
-I2_color = imresize(imread([hg_path '2.jpg']), 0.15);
+I1_color = imresize(imread([fd_path '1.jpg']), 0.15);
+I2_color = imresize(imread([hg_path '1.jpg']), 0.15);
 
 % Also prepare grayscale images for automatic feature detection
 I1_gray = rgb2gray(I1_color);
@@ -90,7 +90,7 @@ matchedPoints2_auto = validPoints2_auto(indexPairs(:, 2));
 % Display automatic matches
 figure;
 showMatchedFeatures(I1_color, I2_color, matchedPoints1_auto.Location, matchedPoints2_auto.Location, ...
-    'montage', 'PlotOptions', {'r.','g.','y-'});
+    'montage', 'PlotOptions', {'r.','g.','w:'});
 title('Automatic Matched Features');
 
 % Estimate projective transformation using automatic matches
