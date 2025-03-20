@@ -23,11 +23,11 @@ function find_correspondence(fd_images, hg_images)
         end
 
         % Detect features and extract descriptors
-        % pointsFD = detectSURFFeatures(imgFD);
-        % pointsHG = detectSURFFeatures(imgHG);
+        pointsFD = detectSURFFeatures(imgFD);
+        pointsHG = detectSURFFeatures(imgHG);
         
-        pointsFD = detectKAZEFeatures(imgFD);
-        pointsHG = detectKAZEFeatures(imgHG);
+        % pointsFD = detectKAZEFeatures(imgFD);
+        % pointsHG = detectKAZEFeatures(imgHG);
 
         [featuresFD, validPointsFD] = extractFeatures(imgFD, pointsFD);
         [featuresHG, validPointsHG] = extractFeatures(imgHG, pointsHG);
