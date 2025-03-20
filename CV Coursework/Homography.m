@@ -34,6 +34,7 @@ figure; showMatchedFeatures(img1, img2, matchedPoints1, matchedPoints2, 'montage
 title('Keypoints Matching for Homography Estimation');
 
 %% ======== TASK 4.2: Fundamental Matrix Estimation ===========
+
 % Detect feature points again
 points1 = detectSURFFeatures(gray1);
 points2 = detectSURFFeatures(gray2);
