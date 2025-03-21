@@ -35,7 +35,6 @@ function find_correspondence(fd_images, hg_images)
         % Get matching points
         matchedPointsFD = validPointsFD(indexPairs(:,1), :);
         matchedPointsHG = validPointsHG(indexPairs(:,2), :);
-
         % Display matches without lines
         figure;
         showMatchedFeatures(imgFD, imgHG, matchedPointsFD, matchedPointsHG, 'montage', 'PlotOptions', {'r.','g.','y--'});

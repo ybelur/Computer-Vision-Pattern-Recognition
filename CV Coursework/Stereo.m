@@ -1,3 +1,5 @@
+clc; clear; close all;
+
 % Load stereo images (Modify file names accordingly)
 leftImg = imread('Photos/Grid/FD/1.jpg');  
 rightImg = imread('Photos/Grid/FD/2.jpg'); 
@@ -12,10 +14,8 @@ else
 end
 
 % Detect and extract features
-
 points1 = detectSURFFeatures(leftImgGray);
 points2 = detectSURFFeatures(rightImgGray);
-
 [features1, validPoints1] = extractFeatures(leftImgGray, points1);
 [features2, validPoints2] = extractFeatures(rightImgGray, points2);
 
@@ -36,15 +36,16 @@ inlierPoints2 = matchedPoints2(inliers);
 figure;
 subplot(2,2,1);
 imshow(leftImg);
-title('Original HG Image');
+title('Original Left Image');
 
 subplot(2,2,2);
 imshow(rightImg);
-title('Original FD Image');
+title('Original Right Image');
 
-% Stereo Rectification
+% Stereo Rectification (uncalibrated)
 imageSize = size(leftImgGray);
-[t1, t2] = estimateUncalibratedRectification(fMatrix, inlierPoints1.Location, inlierPoints2.Location, imageSize);
+[t1, t2] = estimateUncalibratedRectification(fMatrix, ...
+    inlierPoints1.Location, inlierPoints2.Location, imageSize);
 
 % Convert to projective transformations
 tform1 = projective2d(t1);
@@ -54,23 +55,26 @@ tform2 = projective2d(t2);
 leftRectified = imwarp(leftImgGray, tform1, 'OutputView', imref2d(imageSize));
 rightRectified = imwarp(rightImgGray, tform2, 'OutputView', imref2d(imageSize));
 
-% Draw epipolar lines
-figure;
+% Rectify the inlier points as well
+inlierPoints1Rect = transformPointsForward(tform1, inlierPoints1.Location);
+inlierPoints2Rect = transformPointsForward(tform2, inlierPoints2.Location);
+
+% Display rectified images with epipolar lines through matching points
 subplot(2,2,3);
 imshow(leftRectified);
 hold on;
-epilines = linspace(1, size(leftRectified,1), 10); % 10 epipolar lines
-for i = 1:length(epilines)
-    line([1 size(leftRectified,2)], [epilines(i) epilines(i)], 'Color', 'r', 'LineWidth', 1);
+for i = 1:size(inlierPoints1Rect,1)
+    y = inlierPoints1Rect(i,2);
+    line([1 size(leftRectified,2)], [y y], 'Color', 'r', 'LineWidth', 1);
 end
-title('Rectified HF Image with Epipolar Lines');
+title('Rectified Left Image with Epipolar Lines');
 
 subplot(2,2,4);
 imshow(rightRectified);
 hold on;
-for i = 1:length(epilines)
-    line([1 size(rightRectified,2)], [epilines(i) epilines(i)], 'Color', 'r', 'LineWidth', 1);
+for i = 1:size(inlierPoints2Rect,1)
+    y = inlierPoints2Rect(i,2);
+    line([1 size(rightRectified,2)], [y y], 'Color', 'r', 'LineWidth', 1);
 end
-title('Rectified FD Image with Epipolar Lines');
-hold off
-
+title('Rectified Right Image with Epipolar Lines');
+hold off;

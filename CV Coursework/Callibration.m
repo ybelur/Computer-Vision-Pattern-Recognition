@@ -62,7 +62,7 @@ fprintf('Tangential Distortion Coefficients: [%.4f, %.4f]\n\n', ...
 % Show an example of an original image and its undistorted version.
 
 % Read one of the calibration images.
-originalImage = imread(imageFileNames{find(imagesUsed,1)});
+originalImage = imread(imageFileNames{find(imagesUsed,1 )});
 
 % Undistort the image using the estimated camera parameters.
 undistortedImage = undistortImage(originalImage, cameraParams);
