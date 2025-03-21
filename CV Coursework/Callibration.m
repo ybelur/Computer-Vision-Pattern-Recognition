@@ -1,7 +1,3 @@
-%% Task 3: Camera Calibration
-% This script performs camera calibration using a set of images of a calibration grid.
-% It finds and reports the camera parameters and illustrates the effect of lens distortions.
-% Requirements: Computer Vision Toolbox
 
 % Clear workspace and close figures
 clear; close all; clc;
@@ -9,7 +5,7 @@ clear; close all; clc;
 %% 1. Specify Calibration Images
 % List your calibration image file names here.
 % Ensure these images show a calibration grid (e.g., checkerboard) taken from different views.
-imageFileNames = { 'Photos/No_Object/FD/1.jpg', 'Photos/No_Object/FD/2.jpg', 'Photos/No_Object/FD/3.jpg', 'Photos/No_Object/FD/4.jpg', 'Photos/No_Object/FD/5.jpg', 'Photos/No_Object/FD/6.jpg' };
+imageFileNames = { 'Photos/Grid/FD/1.jpg', 'Photos/Grid/FD/2.jpg', 'Photos/Grid/FD/3.jpg', 'Photos/Grid/FD/4.jpg', 'Photos/Grid/FD/5.jpg', 'Photos/Grid/FD/6.jpg' };
 
 %% 2. Detect Checkerboard Points
 % detectCheckerboardPoints automatically finds the corners in the grid pattern.

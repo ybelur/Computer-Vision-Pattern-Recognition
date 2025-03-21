@@ -65,3 +65,11 @@ function plot_lines(lines, img_size)
         plot(x_vals, y_vals, 'y-', 'LineWidth', 2);
     end
 end
+
+% % Compute number of inliers
+% numInliers = sum(inliers);
+% numOutliers = length(inliers) - numInliers;
+% 
+% fprintf('Number of inliers: %d\n', numInliers);
+% fprintf('Number of outliers: %d\n', numOutliers);
+% fprintf('Outlier Tolerance Ratio: %.2f%%\n', (numOutliers / length(inliers)) * 100);
